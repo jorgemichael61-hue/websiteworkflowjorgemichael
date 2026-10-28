@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none" stroke="#4A2E9C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+  <title>Andorinha — flash original em linha fina</title>
+  <g id="half">
+    <path d="M120 44 C 114 50, 108 58, 108 70 C 108 92, 112 120, 116 140"/>
+    <path d="M109 84 C 92 82, 64 88, 22 112 C 52 108, 76 106, 92 108 C 70 116, 54 124, 40 134 C 66 128, 92 120, 112 110"/>
+    <path d="M100 92 C 80 96, 58 104, 40 114" stroke-width="1"/>
+    <path d="M116 140 C 112 160, 104 184, 92 204 C 104 192, 114 176, 120 160"/>
+    <path d="M114 70 a 2 2 0 1 0 0.1 0" />
+  </g>
+  <use href="#half" transform="translate(240 0) scale(-1 1)"/>
+  <path d="M113 96 h14 M114 108 h12 M116 120 h8" stroke-width="1"/>
+</svg>

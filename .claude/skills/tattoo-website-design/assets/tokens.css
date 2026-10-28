@@ -1,0 +1,160 @@
+/* ==========================================================================
+   Tattoo Website Design System — tokens + componentes base
+   Copiar para o projeto e ajustar a secção "1. Marca". Sem dependências.
+   ========================================================================== */
+
+/* ---------- 1. Marca (SUBSTITUIR por cliente — estes valores são neutros de propósito) ---------- */
+:root {
+  /* Paleta: fundo, superfície, tinta, texto suave, linha, acento.
+     Tirar as cores das fotos do artista; não deixar estes valores num site entregue. */
+  --c-bg: #F2F2F0;
+  --c-surface: #E6E6E3;
+  --c-ink: #1A1A1A;
+  --c-ink-soft: #555555;      /* ≥ 4.5:1 sobre --c-bg */
+  --c-line: #CCCCC8;
+  --c-accent: #1A1A1A;        /* botões, links, detalhes */
+  --c-accent-ink: #FFFFFF;    /* texto sobre o acento */
+  --c-focus: #1C1A17;
+
+  /* Fontes: display (títulos) + texto */
+  --f-display: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --f-text: "Instrument Sans", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* Presets de direção (ver design-patterns.md). Ativar com <html data-direction="..."> */
+[data-direction="dark"] {
+  --c-bg: #0E0E0E; --c-surface: #181818; --c-ink: #E9E4DA; --c-ink-soft: #A8A29A;
+  --c-line: #2E2E2E; --c-accent: #B08D57; --c-accent-ink: #0E0E0E; --c-focus: #E9E4DA;
+}
+[data-direction="fineline"] {
+  --c-bg: #FBFAF7; --c-surface: #F1EEE8; --c-ink: #222222; --c-ink-soft: #625D56;
+  --c-line: #DDD8CF; --c-accent: #8A5A4E; --c-accent-ink: #FFFFFF;
+}
+[data-direction="traditional"] {
+  --c-bg: #F2E8D5; --c-surface: #E8DCC3; --c-ink: #141414; --c-ink-soft: #4F473B;
+  --c-line: #CDBE9F; --c-accent: #B3261E; --c-accent-ink: #FFFFFF;
+}
+
+/* ---------- 2. Escalas ---------- */
+:root {
+  /* Tipografia fluida (360px → 1440px). Rácio ~1.25 no texto, maior nos títulos */
+  --fs-xs: 0.8125rem;                                   /* 13 — legendas, labels */
+  --fs-sm: 0.9375rem;                                   /* 15 */
+  --fs-base: 1.0625rem;                                 /* 17 — corpo */
+  --fs-lg: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);  /* 19→22 — lead */
+  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);    /* 22→28 */
+  --fs-h2: clamp(2rem, 1.5rem + 2.4vw, 3.5rem);         /* 32→56 */
+  --fs-h1: clamp(2.75rem, 1.6rem + 5.6vw, 6.5rem);      /* 44→104 */
+  --lh-tight: 1.02;
+  --lh-snug: 1.2;
+  --lh-text: 1.6;
+  --tracking-label: 0.14em;
+
+  /* Espaço: escala de 4px */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem;
+  --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem; --s-10: 8rem;
+  --section-y: clamp(4rem, 2.5rem + 6vw, 8rem);   /* espaço vertical entre secções */
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);  /* margem lateral */
+  --container: 1240px;
+  --measure: 62ch;                                 /* largura máx. de texto */
+
+  /* Forma */
+  --radius-sm: 2px;
+  --radius: 4px;            /* tatuagem pede cantos discretos; evitar 16px+ */
+  --border: 1px solid var(--c-line);
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 700ms;
+}
+
+/* Breakpoints (usar em media queries; CSS vars não funcionam em @media)
+   sm 600px · md 900px · lg 1200px — mobile-first com min-width */
+
+/* ---------- 3. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  margin: 0; background: var(--c-bg); color: var(--c-ink);
+  font: 400 var(--fs-base)/var(--lh-text) var(--f-text);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img, svg, video { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: var(--lh-snug); margin: 0; text-wrap: balance; }
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); letter-spacing: -0.02em; }
+h2 { font-size: var(--fs-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--fs-h3); }
+p { margin: 0 0 var(--s-4); max-width: var(--measure); text-wrap: pretty; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: var(--s-4); top: -100px; z-index: 100; background: var(--c-ink); color: var(--c-bg); padding: var(--s-3) var(--s-4); }
+.skip-link:focus { top: var(--s-4); }
+
+/* ---------- 4. Layout ---------- */
+.container { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
+.section { padding-block: var(--section-y); }
+.eyebrow { font: 500 var(--fs-xs)/1.3 var(--f-text); text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--c-ink-soft); }
+.lead { font-size: var(--fs-lg); color: var(--c-ink-soft); }
+
+/* ---------- 5. Botões ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-height: 48px; padding: 0 var(--s-5);           /* alvo de toque ≥ 44px */
+  font: 500 var(--fs-sm)/1 var(--f-text); letter-spacing: 0.02em;
+  border: 1px solid transparent; border-radius: var(--radius); cursor: pointer; text-decoration: none;
+  transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
+}
+.btn--primary { background: var(--c-accent); color: var(--c-accent-ink); }
+.btn--primary:hover { filter: brightness(1.1); }
+.btn--ghost { border-color: currentColor; color: var(--c-ink); background: transparent; }
+.btn--ghost:hover { background: var(--c-ink); color: var(--c-bg); }
+.btn:active { transform: translateY(1px); }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- 6. Formulários ---------- */
+.field { display: grid; gap: var(--s-2); margin-bottom: var(--s-5); }
+.field label, .field legend { font-size: var(--fs-sm); font-weight: 500; }
+.field .hint { font-size: var(--fs-xs); color: var(--c-ink-soft); }
+.input, .select, .textarea {
+  width: 100%; min-height: 48px; padding: var(--s-3) var(--s-4);
+  font: inherit; font-size: 1rem;                      /* ≥16px evita zoom no iOS */
+  color: var(--c-ink); background: var(--c-bg); border: var(--border); border-radius: var(--radius);
+}
+.textarea { min-height: 140px; resize: vertical; }
+.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--c-focus); outline-offset: 1px; border-color: var(--c-ink); }
+[aria-invalid="true"] { border-color: #B42318; }
+.error-msg { font-size: var(--fs-xs); color: #B42318; }
+
+/* ---------- 7. Cartões e galeria ---------- */
+.card { display: grid; gap: var(--s-3); }
+.card__media { aspect-ratio: 4 / 5; overflow: hidden; background: var(--c-surface); border-radius: var(--radius-sm); }
+.card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease-out); }
+.card:hover .card__media img { transform: scale(1.03); }
+
+.gallery { display: grid; gap: var(--s-3); grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); gap: var(--s-4); } }
+.gallery > * { aspect-ratio: 4 / 5; }
+.gallery > .is-wide { grid-column: span 2; aspect-ratio: 8 / 5; }
+
+/* Rácios recomendados: hero 16:9 desktop / 4:5 mobile · portfólio 4:5 · close-up 1:1 · artista 3:4 · estúdio 3:2 */
+
+/* ---------- 8. Navegação ---------- */
+.site-header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--c-bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: var(--border); }
+.nav { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: var(--s-4); }
+.nav__links { display: none; gap: var(--s-6); list-style: none; margin: 0; padding: 0; }
+@media (min-width: 900px) { .nav__links { display: flex; } .nav__toggle { display: none; } }
+
+/* ---------- 9. Movimento ---------- */
+/* Revelar ao fazer scroll: só opacity/transform, uma vez, curto.
+   Escondido apenas quando o JS corre (<html class="js">) — sem JS o conteúdo fica visível. */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
