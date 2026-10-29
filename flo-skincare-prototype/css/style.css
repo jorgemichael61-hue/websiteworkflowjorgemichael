@@ -99,7 +99,7 @@ main{position:relative;z-index:2}
 
 /* ---------- 1 hero ---------- */
 .hero{position:relative;height:100svh;min-height:620px}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(0deg,rgba(4,34,52,.6),transparent 55%),linear-gradient(90deg,rgba(4,34,52,.35),transparent 50%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(0deg,rgba(0,52,80,.32),transparent 45%),linear-gradient(90deg,rgba(0,52,80,.22),transparent 45%)}
 .hero__fallback{display:none}
 .no-webgl .hero__fallback{display:block;position:absolute;left:0;right:0;top:20vh;text-align:center;font-family:var(--serif);font-weight:700;font-size:24vw;color:var(--flo)}
 .hero__copy{position:absolute;left:var(--g);bottom:clamp(70px,11vh,130px);max-width:640px}

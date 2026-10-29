@@ -26,7 +26,7 @@ function build() {
   renderer.setPixelRatio(dpr);
   if ('transmissionResolutionScale' in renderer) renderer.transmissionResolutionScale = .5;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.92;
+  renderer.toneMappingExposure = 1.0;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
@@ -55,24 +55,24 @@ function build() {
     vec3 skyBase(vec3 d, bool clouds){
       float h=d.y;
       float w=clamp(uWarm,0.,1.4);
-      vec3 zen=mix(vec3(.015,.16,.48), vec3(.04,.08,.26), smoothstep(.5,1.4,w));
-      vec3 hor=mix(vec3(.42,.72,.80), vec3(1.,.48,.22), smoothstep(.35,1.,w));
+      vec3 zen=mix(vec3(.008,.15,.66), vec3(.04,.08,.26), smoothstep(.55,1.4,w));
+      vec3 hor=mix(vec3(.36,.74,.90), vec3(1.,.48,.22), smoothstep(.5,1.,w));
       hor=mix(hor, vec3(.85,.32,.30), smoothstep(1.05,1.4,w));
       vec3 c=mix(hor, zen, pow(clamp(h,0.,1.),.55));
       if(h<0.) c=mix(hor, vec3(.03,.18,.25), clamp(-h*3.,0.,1.));
       float sd=max(dot(d,uSunDir),0.);
-      c+=sunCol()*pow(sd,6.)*(.12+.5*w);
+      c+=sunCol()*pow(sd,6.)*(.06+.55*w);
       c+=sunCol()*pow(sd,48.)*.9;
       c+=sunCol()*28.*smoothstep(.99955,.9998,sd);
       // clouds
       if(clouds && h>0.){
         vec2 cp=d.xz/(h+.07)*.9+vec2(uTime*.008,0.);
-        float cl=smoothstep(.56,.9,fbm(cp*.55));
+        float cl=smoothstep(.64,.94,fbm(cp*.55));
         vec3 cc=mix(vec3(1.,.97,.93), vec3(1.,.55,.42), smoothstep(.2,1.1,w))*(.55+1.1*pow(sd,3.));
         cc=mix(cc, cc*vec3(.75,.55,.7), smoothstep(1.1,1.4,w));
-        c=mix(c, cc, cl*.5*smoothstep(0.,.12,h));
+        c=mix(c, cc, cl*.45*smoothstep(0.,.12,h));
       }
-      c=mix(c, hor*1.05, exp(-abs(h)*30.)*.4);
+      c=mix(c, hor*1.05, exp(-abs(h)*40.)*.3);
       return c;
     }
     vec3 skyCol(vec3 d){ return skyBase(d,true); }
@@ -104,7 +104,7 @@ function build() {
       return pow(1.-clamp(l,0.,1.),12.);
     }
     vec3 underFog(vec3 c, float dist){
-      vec3 uw=vec3(.01,.22,.28);
+      vec3 uw=vec3(.0,.36,.44);
       return mix(c, uw, 1.-exp(-dist*.055));
     }
   `;
@@ -115,7 +115,7 @@ function build() {
     new THREE.ShaderMaterial({
       uniforms: U, side: THREE.BackSide, depthWrite: false,
       vertexShader: 'varying vec3 vD; void main(){ vD=normalize(position); vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.); gl_Position=p.xyww; }',
-      fragmentShader: COMMON + `varying vec3 vD; void main(){ gl_FragColor=vec4(skyCol(normalize(vD)),1.);
+      fragmentShader: COMMON + `varying vec3 vD; void main(){ vec3 sc=skyCol(normalize(vD)); sc=max(mix(vec3(dot(sc,vec3(.3,.59,.11))),sc,1.18),0.); gl_FragColor=vec4(sc,1.);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }`
@@ -178,7 +178,7 @@ function build() {
           if(!gl_FrontFacing){
             // seen from below: Snell's window and total internal reflection
             float c=abs(dot(N,V));
-            vec3 col=mix(vec3(.02,.30,.36), vec3(.55,.95,.92), smoothstep(.62,.82,c));
+            vec3 col=mix(vec3(.0,.42,.48), vec3(.55,1.,.95), smoothstep(.62,.82,c));
             col+=sunCol()*pow(max(dot(-V,uSunDir),0.),40.)*1.5;
             col+=caustic(xz*.5,uTime*.6)*.25;
             gl_FragColor=vec4(underFog(col,dist),1.);
@@ -188,14 +188,14 @@ function build() {
           }
           // refraction colour from depth over the sand
           vec3 sand=vec3(.78,.60,.38);
-          vec3 crystal=vec3(.10,.72,.68);
-          vec3 lagoon=vec3(.0,.34,.42);
-          vec3 deep=vec3(.0,.10,.20);
+          vec3 crystal=vec3(.10,.86,.72);
+          vec3 lagoon=vec3(.0,.55,.60);
+          vec3 deep=vec3(.0,.16,.42);
           vec3 refr=mix(sand*vec3(.8,1.,.95), crystal, smoothstep(0.,.9,depth));
-          refr=mix(refr, lagoon, smoothstep(.9,4.,depth));
-          refr=mix(refr, deep, smoothstep(5.,40.,depth));
+          refr=mix(refr, lagoon, smoothstep(.6,3.5,depth));
+          refr=mix(refr, deep, smoothstep(6.,28.,depth)*.85);
           refr+=caustic(xz*.7,uTime*.6)*.35*(1.-smoothstep(.2,3.5,depth))*vec3(.8,1.,.95);
-          refr*=.55+.5*max(dot(N,uSunDir),0.)+.15;
+          refr*=.85+.35*max(dot(N,uSunDir),0.);
           vec3 R=reflect(-V,N); R.y=abs(R.y);
           vec3 refl=dist<160. ? skyCol(R) : skyFlat(R);
           // reflection of the horizon wordmark (ray / plane intersection)
@@ -205,7 +205,7 @@ function build() {
             if(wuv.x>0.&&wuv.x<1.&&wuv.y>0.&&wuv.y<1.){ vec4 tc=texture2D(uWM,wuv); refl=mix(refl,tc.rgb*uWMTint,tc.a*.85*uWMA); }
           }
           float fres=.02+.98*pow(1.-max(dot(N,V),0.),5.);
-          fres*=(smoothstep(-.2,1.2,depth)*.9+.1)*.8;
+          fres*=(smoothstep(-.2,1.2,depth)*.9+.1)*.42;
           vec3 col=mix(refr, refl, fres);
           // sun glitter
           vec3 H=normalize(uSunDir+V);
@@ -218,7 +218,8 @@ function build() {
           col=mix(col, vec3(.95,.97,.95), clamp(foam,0.,1.)*.85);
           // horizon haze
           vec3 hz=skyFlat(normalize(vec3(-V.x,.012,-V.z)));
-          col=mix(col, hz, smoothstep(60.,520.,dist));
+          col=mix(col, mix(hz, deep*1.6, .45), smoothstep(140.,620.,dist));
+          col=max(mix(vec3(dot(col,vec3(.3,.59,.11))),col,1.22),0.);   // tropical saturation
           if(uUnder>.5) col=underFog(col,dist);
           gl_FragColor=vec4(col,1.);
           #include <tonemapping_fragment>
@@ -519,14 +520,14 @@ function build() {
   /* ---------------- camera journey ---------------- */
   // one state per [data-scene] section
   const STATES = [
-    { pos: [0, 2.6, 14], look: [1.5, .6, -40], warm: .38, fov: 44, wm: 1, cl: 1 },     // hero beach
-    { pos: [-4, 4.6, 0], look: [6, 1.4, -40], warm: .5, fov: 46, wm: 1, cl: 1 },       // experience — gliding over water
-    { pos: [0, -3.4, -12], look: [0, -3.8, -34], warm: .55, fov: 52, wm: 0, cl: 1 },   // ingredients — under the surface
-    { pos: [12, 5, 16], look: [-8, 1.5, -30], warm: .7, fov: 44, wm: 1, cl: 1 },       // shop panel
+    { pos: [0, 2.6, 14], look: [1.5, .6, -40], warm: .18, fov: 44, wm: 1, cl: 1 },     // hero beach
+    { pos: [-4, 4.6, 0], look: [6, 1.4, -40], warm: .24, fov: 46, wm: 1, cl: 1 },       // experience — gliding over water
+    { pos: [0, -3.4, -12], look: [0, -3.8, -34], warm: .3, fov: 52, wm: 0, cl: 1 },   // ingredients — under the surface
+    { pos: [12, 5, 16], look: [-8, 1.5, -30], warm: .4, fov: 44, wm: 1, cl: 1 },       // shop panel
     { pos: [-1.5, 3.2, 24], look: [-14, 7.5, -60], warm: 1.05, fov: 52, wm: 0, cl: 0 },  // atmosphere — golden hour
     { pos: [0, 8, 30], look: [0, 4.5, -80], warm: 1.38, fov: 40, wm: 0, cl: 0 }        // final — dusk
   ];
-  const INTRO = { pos: [0, 30, 70], look: [0, 0, -60], warm: .38, fov: 44, wm: 1, cl: 1 };
+  const INTRO = { pos: [0, 30, 70], look: [0, 0, -60], warm: .18, fov: 44, wm: 1, cl: 1 };
   const sections = [...document.querySelectorAll('[data-scene]')];
   let anchors = [];
   function measure() {
@@ -606,7 +607,7 @@ function build() {
 
     // sun & time of day
     const w = cur.warm;
-    const elev = .34 - .31 * Math.min(w / 1.3, 1), az = -.18;
+    const elev = .6 - .57 * Math.min(w / 1.3, 1), az = -.18;
     U.uSunDir.value.set(Math.sin(az) * Math.cos(elev), Math.sin(elev), -Math.cos(az) * Math.cos(elev)).normalize();
     U.uWarm.value = w;
     U.uTime.value = t;
