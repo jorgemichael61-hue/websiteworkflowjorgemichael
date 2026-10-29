@@ -1,4 +1,4 @@
-# FLO Skincare — cinematic redesign prototype
+# FLO Skincare — tropical 3D redesign prototype
 
 A self-contained visual prototype for presenting a redesign concept to FLO Skincare
 (floskincare.co.uk). It is **not** the live shop: there is no real checkout, payment,
@@ -29,7 +29,7 @@ npx serve -l 8080
 Stop the server with `Ctrl + C`.
 
 If you double-click `index.html` instead, everything works except the WebGL hero,
-which falls back to the poolside video automatically.
+which falls back to a static gradient.
 
 ## What's inside
 
@@ -37,7 +37,7 @@ which falls back to the poolside video automatically.
 | --- | --- |
 | `index.html` | All sections and dialogs |
 | `css/style.css` | Design tokens, layout, responsive rules, reduced-motion |
-| `js/hero3d.js` | Three.js hero: animated pool shader + modelled tin with the real label |
+| `js/world.js` | Three.js world behind the whole page: ocean, beach, sky, palms, glass/gold sculptures, the FLO tin with its real label, the FLO wordmark on the horizon, and the scroll-driven camera journey (beach → over the water → under the surface → golden hour → dusk). Adaptive resolution keeps it smooth on modest GPUs. |
 | `js/main.js` | GSAP/ScrollTrigger choreography, filters, product dialog, demo bag, menu |
 | `js/products.js` | Product data (names/prices from the live shop, ingredients from the labels) |
 | `assets/img`, `assets/video` | Optimised copies of FLO's supplied photos and videos |
