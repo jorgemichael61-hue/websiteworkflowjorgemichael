@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FLO Skincare — Redesign Concept</title>
+<meta name="description" content="Design concept for FLO Skincare: natural, hand-crafted skincare from the UK. Prototype for client presentation.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#08363D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" href="assets/img/label-tinted-sun-balm.jpg" as="image" crossorigin="anonymous">
+</head>
+<body class="is-loading">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Intro curtain -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__mark"><span>F</span><span>L</span><span>O</span></div>
+  <p class="intro__sub">Skincare Co.</p>
+</div>
+
+<!-- Navigation -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__logo" aria-label="FLO Skincare, back to top">FLO<small>Skincare Co.</small></a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#shop">Shop</a>
+    <a href="#collections">Collections</a>
+    <a href="#ingredients">Ingredients</a>
+    <a href="#story">Our story</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="nav__bag" id="bagBtn" aria-haspopup="dialog" aria-controls="bag">Bag <span class="nav__count" id="bagCount">0</span></button>
+    <button class="nav__burger" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Mobile">
+    <a href="#shop">Shop</a>
+    <a href="#collections">Collections</a>
+    <a href="#ingredients">Ingredients</a>
+    <a href="#story">Our story</a>
+    <a href="#journal">10% off</a>
+  </nav>
+  <p class="menu__foot">Hand crafted in the UK</p>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-label="Introduction">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <video class="hero__fallback" id="heroFallback" muted playsinline loop preload="none"
+      poster="assets/video/sun-balm-float-reveal.jpg" data-src="assets/video/sun-balm-float-reveal.mp4" aria-hidden="true"></video>
+    <div class="hero__shade" aria-hidden="true"></div>
+
+    <div class="hero__copy">
+      <h1 class="hero__title"><span class="line"><span>Nature,</span></span><span class="line"><span>refined.</span></span></h1>
+      <p class="hero__lede">A more natural approach to skincare, built on simple ingredients and everyday rituals. Hand crafted in small batches in the UK.</p>
+      <div class="hero__cta">
+        <a href="#shop" class="btn btn--light">Shop the collection</a>
+        <a href="#film" class="btn btn--ghost">Watch the film</a>
+      </div>
+    </div>
+
+    <p class="hero__caption" aria-hidden="true">Tinted Tallow Sun Balm, modelled in 3D with its real label</p>
+    <a href="#film" class="hero__scroll" aria-label="Scroll to explore"><span></span></a>
+  </section>
+
+  <!-- STRIPE BAND -->
+  <div class="band" aria-label="Brand promises">
+    <div class="band__track">
+      <span>Clean skincare</span><i>✶</i><span>100% organic</span><i>✶</i><span>Ethically sourced</span><i>✶</i><span>Paraben free</span><i>✶</i><span>Hand crafted in the UK</span><i>✶</i>
+      <span aria-hidden="true">Clean skincare</span><i>✶</i><span aria-hidden="true">100% organic</span><i>✶</i><span aria-hidden="true">Ethically sourced</span><i>✶</i><span aria-hidden="true">Paraben free</span><i>✶</i><span aria-hidden="true">Hand crafted in the UK</span><i>✶</i>
+    </div>
+  </div>
+
+  <!-- FILM STRIP -->
+  <section class="film" id="film" aria-labelledby="filmTitle">
+    <div class="film__intro">
+      <h2 id="filmTitle" class="display">Made for sun-filled days</h2>
+      <p>Balms that go in the beach bag, oils that live by the pool. Everything FLO makes is meant to be used, often, without a second thought about what's inside.</p>
+    </div>
+    <div class="film__reels">
+      <figure class="reel reel--a" data-speed="-60">
+        <video muted playsinline loop preload="none" poster="assets/video/palm-tallow-sun-balm.jpg" data-src="assets/video/palm-tallow-sun-balm.mp4" aria-label="Tallow Based Sun Balm held up beneath palm leaves"></video>
+        <figcaption>Tallow Based Sun Balm</figcaption>
+      </figure>
+      <figure class="reel reel--b" data-speed="80">
+        <video muted playsinline loop preload="none" poster="assets/video/hair-oil-water.jpg" data-src="assets/video/hair-oil-water.mp4" aria-label="Hair Oil bottle held above clear pool water"></video>
+        <figcaption>Hair Oil</figcaption>
+      </figure>
+      <figure class="reel reel--c" data-speed="-30">
+        <video muted playsinline loop preload="none" poster="assets/video/float-rotate.jpg" data-src="assets/video/float-rotate.mp4" aria-label="FLO tins resting on a green and cream pool float"></video>
+        <figcaption>The sun care edit</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section class="collections" id="collections" aria-labelledby="colTitle">
+    <header class="sec-head">
+      <h2 id="colTitle" class="display">Three rituals</h2>
+      <p>The range is small on purpose. Choose where to start.</p>
+    </header>
+    <div class="collections__grid">
+      <button class="col col--sun" data-filter="suncare">
+        <span class="col__media"><img src="assets/img/tinted-palm-hand.jpg" srcset="assets/img/tinted-palm-hand-sm.jpg 600w, assets/img/tinted-palm-hand.jpg 1200w" sizes="(max-width: 900px) 100vw, 55vw" alt="A hand holding a Tinted Tallow Sun Balm tin under a palm frond" loading="lazy"></span>
+        <span class="col__text"><span class="col__name">Suncare</span><span class="col__desc">The best-selling Sun Balm range, made with 100% natural ingredients.</span><span class="col__go">See sun balms</span></span>
+      </button>
+      <button class="col col--hair" data-filter="hair">
+        <span class="col__media"><img src="assets/img/hair-oil-water-sm.jpg" alt="FLO Hair Oil held over sparkling pool water" loading="lazy"></span>
+        <span class="col__text"><span class="col__name">Hair</span><span class="col__desc">A blend of natural oils to help strengthen and protect.</span><span class="col__go">See hair care</span></span>
+      </button>
+      <button class="col col--body" data-filter="face-body">
+        <span class="col__media"><img src="assets/img/poolside-open-tins-sm.jpg" alt="Open FLO tins showing balm, tinted balm, salt scrub and lip balm by the pool" loading="lazy"></span>
+        <span class="col__text"><span class="col__name">Face &amp; Body</span><span class="col__desc">Balms, scrubs and masks made with 100% natural ingredients.</span><span class="col__go">See face &amp; body</span></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- PRODUCT RAIL -->
+  <section class="shop" id="shop" aria-labelledby="shopTitle">
+    <div class="shop__pin">
+      <header class="shop__head">
+        <h2 id="shopTitle" class="display">The shop</h2>
+        <div class="filters" role="group" aria-label="Filter products">
+          <button class="chip is-on" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" data-filter="suncare" aria-pressed="false">Suncare</button>
+          <button class="chip" data-filter="face-body" aria-pressed="false">Face &amp; Body</button>
+          <button class="chip" data-filter="hair" aria-pressed="false">Hair</button>
+        </div>
+      </header>
+      <div class="rail" id="rail" tabindex="0" aria-label="Products, scroll horizontally"></div>
+      <p class="shop__note">Prices from floskincare.co.uk. Prototype only, no live checkout.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="feature" id="featured" aria-labelledby="featTitle">
+    <div class="feature__media">
+      <img src="assets/img/tinted-mosaic.jpg" alt="Tinted Tallow Sun Balm tin resting under clear water over pink mosaic tiles" loading="lazy">
+    </div>
+    <div class="feature__body">
+      <p class="feature__kicker">Featured</p>
+      <h2 id="featTitle" class="display">Tinted Tallow Sun Balm</h2>
+      <p class="feature__claim">100% natural protection. Reef and coral safe.</p>
+      <div class="feature__label">
+        <h3>What's inside</h3>
+        <p>Grass-fed tallow, non-nano zinc oxide, cocoa butter, coconut oil, shea butter, olive oil, jojoba oil, beeswax, chaga mushroom and cacao.</p>
+        <h3>How to use</h3>
+        <p>Apply every few hours, and after swimming or towel drying. Suitable for all skin types.</p>
+      </div>
+      <div class="feature__buy">
+        <span class="price">From £14.00</span>
+        <button class="btn btn--dark" data-add="tinted-sun-balm">Add to bag</button>
+        <button class="btn btn--line" data-open="tinted-sun-balm">View details</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS -->
+  <section class="ingredients" id="ingredients" aria-labelledby="ingTitle">
+    <div class="ingredients__rows" aria-hidden="true">
+      <div class="row" data-dir="-1"><span>Grass-fed tallow</span><span>Shea butter</span><span>Cocoa butter</span><span>Jojoba oil</span><span>Beeswax</span></div>
+      <div class="row" data-dir="1"><span>Himalayan salt</span><span>Batana oil</span><span>Argan oil</span><span>Rosemary</span><span>Lemongrass</span></div>
+      <div class="row" data-dir="-1"><span>Kaolin clay</span><span>Chamomile</span><span>Olive oil</span><span>Grapefruit</span><span>Cacao</span></div>
+    </div>
+    <div class="ingredients__stage">
+      <figure class="arch">
+        <video muted playsinline loop preload="none" poster="assets/video/balm-application.jpg" data-src="assets/video/balm-application.mp4" aria-label="Sun balm being smoothed onto sunlit legs beside a pool"></video>
+      </figure>
+      <div class="ingredients__copy">
+        <h2 id="ingTitle" class="display">Ingredients you can read</h2>
+        <p>Every label lists what's in the tin, and the list stays short. Ancestral ingredients like tallow, butters and plant oils, without preservatives, fillers or harsh extras.</p>
+      </div>
+    </div>
+    <div class="why">
+      <article>
+        <h3>Lower your toxin exposure</h3>
+        <p>We meet hundreds of chemicals a day through skincare, hair care and household products. Switching to natural skincare is an easy way to lighten that load.</p>
+      </article>
+      <article>
+        <h3>Gentle on sensitive skin</h3>
+        <p>Natural ingredients are often gentler and work in harmony with sensitive, reactive or acne-prone skin.</p>
+      </article>
+      <article>
+        <h3>Simple ingredients</h3>
+        <p>Clean, whole ingredients you recognise. Free from preservatives and fillers you don't need.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story" aria-labelledby="storyTitle">
+    <div class="story__media">
+      <img src="assets/img/garden-collection.jpg" alt="The FLO range of tins, hair oil and detox kit on a wooden bench in a herb garden" loading="lazy">
+    </div>
+    <div class="story__copy">
+      <h2 id="storyTitle" class="display">It started at home</h2>
+      <p>FLO began with a baby whose skin was struggling. When prescribed treatments didn't help, our founder moved her son to gentler, natural products, and quickly found how hard they were to find, and how expensive, sun cream most of all.</p>
+      <p>So she started making her own. Friends asked for a tin, then family, and in 2024 FLO officially launched, with one aim: natural skincare that is effective, affordable and honest.</p>
+      <a href="#story" class="btn btn--line" data-demo="The full About page would open here in the finished site.">Read our story</a>
+    </div>
+  </section>
+
+  <!-- REEL GRID -->
+  <section class="poolside" aria-labelledby="poolTitle">
+    <h2 id="poolTitle" class="display poolside__title">From the poolside</h2>
+    <div class="poolside__grid">
+      <video muted playsinline loop preload="none" poster="assets/video/tinted-float.jpg" data-src="assets/video/tinted-float.mp4" aria-label="Tinted sun balm on a pool float"></video>
+      <video muted playsinline loop preload="none" poster="assets/video/mosaic-sun-balm.jpg" data-src="assets/video/mosaic-sun-balm.mp4" aria-label="Sun balm tin floating over mosaic tiles"></video>
+      <video muted playsinline loop preload="none" poster="assets/video/lip-balm-float.jpg" data-src="assets/video/lip-balm-float.mp4" aria-label="Lip balm resting on a pool float"></video>
+      <video muted playsinline loop preload="none" poster="assets/video/hair-oil-poolside.jpg" data-src="assets/video/hair-oil-poolside.mp4" aria-label="Hair Oil held beside the pool"></video>
+    </div>
+    <p class="poolside__handle">Follow along <a href="https://www.instagram.com/flo.skincareco/" target="_blank" rel="noopener">@flo.skincareco</a></p>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="journal" id="journal" aria-labelledby="newsTitle">
+    <h2 id="newsTitle" class="display">10% off your first order</h2>
+    <p>Join the newsletter to hear about new products and offers first.</p>
+    <form class="journal__form" id="newsForm" novalidate>
+      <label for="email" class="sr-only">Email address</label>
+      <input id="email" type="email" placeholder="Your email address" autocomplete="email" required>
+      <button class="btn btn--dark" type="submit">Subscribe</button>
+    </form>
+    <p class="journal__msg" id="newsMsg" role="status"></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__mark">FLO</div>
+  <div class="foot__cols">
+    <nav aria-label="Footer">
+      <a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#story">Our story</a>
+      <a href="https://www.instagram.com/flo.skincareco/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <p>Design concept for FLO Skincare by Jorge Michael.<br>Prototype for presentation only. Not the live shop.</p>
+    <button class="btn btn--light" id="toTop">Back to top</button>
+  </div>
+</footer>
+
+<!-- Product dialog -->
+<dialog class="pd" id="pd" aria-labelledby="pdName">
+  <button class="pd__close" data-close aria-label="Close">×</button>
+  <div class="pd__media"><img id="pdImg" alt=""><img id="pdImg2" alt=""></div>
+  <div class="pd__body">
+    <p class="pd__cat" id="pdCat"></p>
+    <h2 id="pdName" class="display"></h2>
+    <p class="pd__claim" id="pdClaim"></p>
+    <h3>Ingredients</h3><p id="pdIng"></p>
+    <h3>How to use</h3><p id="pdUse"></p>
+    <div class="pd__buy"><span class="price" id="pdPrice"></span><button class="btn btn--dark" id="pdAdd">Add to bag</button></div>
+    <p class="pd__note" id="pdNote"></p>
+  </div>
+</dialog>
+
+<!-- Bag drawer -->
+<dialog class="bag" id="bag" aria-labelledby="bagTitle">
+  <div class="bag__head"><h2 id="bagTitle">Your bag</h2><button class="pd__close" data-close aria-label="Close bag">×</button></div>
+  <ul class="bag__list" id="bagList"></ul>
+  <p class="bag__empty" id="bagEmpty">Your bag is empty. Add a balm from the shop to see it here.</p>
+  <div class="bag__foot">
+    <p class="bag__total"><span>Subtotal</span><strong id="bagTotal">£0.00</strong></p>
+    <button class="btn btn--dark" id="checkoutBtn">Checkout</button>
+    <p class="bag__note">Checkout is switched off in this prototype.</p>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+<script type="module" src="js/hero3d.js"></script>
+</body>
+</html>
